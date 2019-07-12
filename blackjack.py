@@ -304,11 +304,11 @@ def compare_hand(player, player_hand, dealer_hand, player_wager):
     '''Compare a single hand to the dealer's final hand'''
 
     if dealer_hand.value > player_hand.value:
-        print(f"{player.name}, the dealer's hand beats your hand of {player_hand}.")
+        print(f"{player.name}, the dealer's hand beats your hand {player_hand}.")
         print(f"Your bet is forfeit. You now have ${player.money}.")
 
     elif dealer_hand.value == player_hand.value:
-        print(f"{player.name}, your hand of {player_hand} has tied the dealer.")
+        print(f"{player.name}, your hand {player_hand} has tied the dealer.")
         player.money += player_wager
         print(f"We are returning your ${player_wager} bet to you. You have ${player.money} again.")
 
@@ -440,6 +440,7 @@ def play_game():
         sleep(1)
 
         #This for-loop allows each of the remaining players to hit, stand, or double down in turn.
+
         for player in players:
             if player.hand.blackjack == False and player.stand == False:
                 while player.hand.value < LIMIT:
@@ -535,7 +536,6 @@ def play_game():
         else:
             ask_to_continue(players)
 
-
     print("There are no more players, goodbye!")
         
 
@@ -550,3 +550,8 @@ if __name__ == "__main__":
 
 # 2. I realize it's confusing to have both add_card and draw_card methods on the
 # Hand class. Could probably take some time to re-factor and clean that up.
+
+# 3. The implementation of splitting/allowing for a second hand is pretty hacky
+#and involves basically writing the same code twice (for hand 1 and hand 2).
+#There is probably a better way to do this that involves more elegant use of
+#functions and looping.
